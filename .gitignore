@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+build/
+dist/
+.out/
+.next/
+.vercel/
+.netlify/
+
+# Caches
+.cache/
+.parcel-cache/
+.eslintcache
+stylelint.cache
+
+# Logs
+npm-debug.log*
+yarn-error.log*
+*.log
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Editors/OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+
+# Misc
+*.swp
+*.swo

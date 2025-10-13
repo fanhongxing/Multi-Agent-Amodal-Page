@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+    content="Multi-Agent Amodal Completion: Direct Synthesis with Fine-Grained Semantic Guidance — an ACM MM 2025 paper introducing a collaborative multi-agent framework for amodal completion with fine-grained semantic guidance and layered RGBA outputs.">
+  <meta name="keywords" content="Amodal Completion, Multi-Agent, Diffusion, Inpainting, Fine-Grained Semantic Guidance, Diffusion Transformer, ACM MM 2025">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Multi-Agent Amodal Completion: Direct Synthesis with Fine-Grained Semantic Guidance</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+</style>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://scholar.google.com.hk/citations?user=Wnk95ccAAAAJ&hl=en&oi=ao" target="_blank">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://github.com/fanhongxing/awesome-amodal" target="_blank">
+            Awesome Amodal
+          </a>
+          <a class="navbar-item" href="https://huanngzh.github.io/Parts2Whole/" target="_blank">
+            Parts2Whole
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Multi-Agent Amodal Completion: Direct Synthesis with Fine-Grained Semantic Guidance</h1>
+          <h2 class="title is-3 publication-title" style="color: #3390ec"> ACM MM 2025 Oral </h2>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              Hongxing Fan,</span>
+            <span class="author-block">Lipeng Wang,</span>
+            <span class="author-block">Haohua Chen,</span>
+            <span class="author-block">Zehuan Huang,</span>
+            <span class="author-block">Jiangtao Wu,</span>
+            <span class="author-block">Lu Sheng</span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Beihang University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://doi.org/10.1145/3746027.3755225" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark" title="ACM Digital Library">
+                  <span class="icon">
+                      <i class="fas fa-book"></i>
+                  </span>
+                  <span>ACM DL</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2509.17757" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2509.17757" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>PDF</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark" title="Code (coming soon)">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark" title="Video (coming soon)">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <!-- Optional: add Code / Data links when available -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <!-- TODO: replace with paper-specific teaser -->
+      <img src="./static/images/teaser.png" alt="Teaser (placeholder)" height="100%">
+      <h2 class="subtitle has-text-centered">
+        Multi-Agent Amodal Completion framework robustly handles diverse amodal completion challenges, from Object Occlusion and Boundary Truncation to Mixed and Semantic Detail Occlusion. The generated outputs directly enable diverse downstream tasks.
+      </h2>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Amodal completion, generating invisible parts of occluded objects, is vital for applications like image editing and AR. Prior methods face challenges with data needs, generalization, or error accumulation in progressive pipelines. We propose a Collaborative Multi-Agent Reasoning Framework based on upfront collaborative reasoning to overcome these issues. Our framework uses multiple agents to collaboratively analyze occlusion relationships and determine necessary boundary expansion, yielding a precise mask for inpainting. Concurrently, an agent generates fine-grained textual descriptions, enabling Fine-Grained Semantic Guidance. This ensures accurate object synthesis and prevents the regeneration of occluders or other unwanted elements, especially within large inpainting areas. Furthermore, our method directly produces layered RGBA outputs guided by visible masks and attention maps from a Diffusion Transformer, eliminating extra segmentation. Extensive evaluations demonstrate our framework achieves state-of-the-art visual quality.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<section class="">
+  <div class="container is-max-desktop">
+    <!-- Method. -->
+    <div>
+      <div class="is-centered has-text-centered">
+        <h2 class="title is-3">Method</h2>
+      </div>
+      <div class="hero-body" style="padding-bottom: 0;">
+        <!-- TODO: replace with paper-specific overview figure -->
+        <img src="./static/images/overview.png" alt="Method Overview (placeholder)" height="100%">
+      </div>
+      <div class="columns is-centered has-text-centered" style="padding-bottom: 3rem">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              We propose a Collaborative Multi-Agent Reasoning framework. Multiple agents jointly infer the occlusion ordering and required boundary expansion to yield a precise target mask for inpainting. Simultaneously, a description agent produces fine-grained textual descriptions that serve as semantic guidance during generation. The image generator is a Diffusion Transformer guided by visible-region masks and attention maps to directly synthesize layered RGBA outputs, eliminating extra segmentation steps. This design improves controllability and prevents regenerating occluders or unwanted content.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Method. -->
+  </div>
+</section>
+
+<section class="">
+  <div class="container is-max-desktop">
+    <!-- Results 1. -->
+    <div>
+      <div class="is-centered has-text-centered">
+        <h2 class="title is-3">Amodal Completion with Guidance</h2>
+      </div>
+      <div class="hero-body" style="padding-bottom: 0;">
+        <!-- TODO: replace with paper-specific results figure -->
+        <img src="./static/images/result.png" alt="Qualitative Results (placeholder)" height="100%">
+      </div>
+      <div class="columns is-centered has-text-centered" style="padding-bottom: 3rem">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              Our method uses fine-grained textual guidance and agent-derived masks to complete occluded regions accurately while preserving visible content. Example results demonstrate robust completion on challenging occlusions.
+          </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Results 1. -->
+
+  </div>
+</section>
+
+
+<section class="section" id="Acknowledgements">
+  <div class="container is-max-desktop content">
+    <div class="has-text-centered">
+      <h2 class="title">Acknowledgements</h2>
+    </div>
+    <div class="columns is-centered has-text-centered" style="padding-bottom: 1.5rem">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+          <p>
+            We thank Dr. Jiayang Ao for providing the dataset and Dr. Ege Ozguroglu for partial scripts. We also thank Qianqian Liu, Wenqi Zhuo, and Dr. Weinan Guan for their contributions to data collection and organization.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <div class="has-text-centered">
+      <h2 class="title">BibTeX</h2>
+    </div>
+    <div class="columns is-centered has-text-centered" style="padding-bottom: 1.5rem">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+<pre><code>@article{fan2025multi,
+  title={Multi-Agent Amodal Completion: Direct Synthesis with Fine-Grained Semantic Guidance},
+  author={Fan, Hongxing and Wang, Lipeng and Chen, Haohua and Huang, Zehuan and Wu, Jiangtao and Sheng, Lu},
+  journal={arXiv preprint arXiv:2509.17757},
+  year={2025}
+}</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/pdf/2509.17757">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="#" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align: center;">
+            The website template is borrowed from <a href="https://nerfies.github.io/" target="_blank">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
